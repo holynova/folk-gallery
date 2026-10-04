@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>农民画·节日图鉴</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f6efe0;color:#3a3226;font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;line-height:1.6}
+header{background:#b5342a;color:#fff8ea;padding:36px 20px;text-align:center;border-bottom:6px solid #2c5f8a}
+header h1{font-size:2rem;letter-spacing:.15em;margin-bottom:8px}
+header p{opacity:.92;font-size:.95rem}
+nav{position:sticky;top:0;z-index:50;background:#fff8ea;border-bottom:2px solid #e0d3b8;padding:10px;text-align:center}
+nav a{color:#b5342a;text-decoration:none;margin:0 14px;font-weight:600;font-size:.95rem}
+nav a:hover{color:#2c5f8a}
+main{max-width:1200px;margin:0 auto;padding:24px 16px 60px}
+h2{font-size:1.5rem;color:#b5342a;border-left:8px solid #b5342a;padding-left:12px;margin:36px 0 18px}
+h3{font-size:1.15rem;color:#2c5f8a;margin:26px 0 14px;padding-left:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{background:#fffdf6;border:1px solid #e4d7bc;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#eee5cf}
+.card figcaption{padding:10px 12px;font-size:.95rem;font-weight:600;color:#3a3226;text-align:center;border-top:3px solid #2c5f8a}
+footer{text-align:center;padding:28px;color:#8a7a5c;font-size:.85rem}
+#lightbox{position:fixed;inset:0;background:rgba(20,14,8,.92);display:none;align-items:center;justify-content:center;z-index:100;flex-direction:column}
+#lightbox.open{display:flex}
+#lightbox img{max-width:92vw;max-height:82vh;object-fit:contain;border:4px solid #fff8ea;border-radius:6px}
+#lightbox .cap{color:#fff8ea;margin-top:12px;font-size:1.1rem;font-weight:600}
+#lightbox .btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,248,234,.15);color:#fff8ea;border:2px solid #fff8ea;border-radius:50%;width:48px;height:48px;font-size:1.4rem;cursor:pointer}
+#lightbox .btn:hover{background:rgba(255,248,234,.35)}
+#prev{left:16px}#next{right:16px}
+#close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff8ea;font-size:2rem;cursor:pointer}
+@media(max-width:600px){header h1{font-size:1.5rem}.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>农民画 · 节日图鉴</h1>
+  <p>64 幅中国农民画风格作品 —— 田园风情、中秋国庆、中外节日</p>
+</header>
+<nav>
+  <a href="#rural">田园乡村</a><a href="#holiday">中秋国庆</a><a href="#festivals">中外节日</a>
+</nav>
+<main>
+<section id="rural"><h2>田园乡村</h2><div class="grid">
+<figure class="card" data-idx="1">
+      <img src="images/01.webp" alt="水乡早市" loading="lazy">
+      <figcaption>水乡早市</figcaption>
+    </figure>
+<figure class="card" data-idx="2">
+      <img src="images/02.webp" alt="丰收打谷场" loading="lazy">
+      <figcaption>丰收打谷场</figcaption>
+    </figure>
+<figure class="card" data-idx="3">
+      <img src="images/03.webp" alt="渔村归来" loading="lazy">
+      <figcaption>渔村归来</figcaption>
+    </figure>
+<figure class="card" data-idx="4">
+      <img src="images/04.webp" alt="梯田春耕" loading="lazy">
+      <figcaption>梯田春耕</figcaption>
+    </figure>
+</div></section>
+<section id="holiday"><h2>中秋国庆</h2><div class="grid">
+<figure class="card" data-idx="5">
+      <img src="images/05.webp" alt="中秋·庭院赏月" loading="lazy">
+      <figcaption>中秋·庭院赏月</figcaption>
+    </figure>
+<figure class="card" data-idx="6">
+      <img src="images/06.webp" alt="国庆·天安门广场" loading="lazy">
+      <figcaption>国庆·天安门广场</figcaption>
+    </figure>
+<figure class="card" data-idx="7">
+      <img src="images/07.webp" alt="国庆·万里长城" loading="lazy">
+      <figcaption>国庆·万里长城</figcaption>
+    </figure>
+<figure class="card" data-idx="8">
+      <img src="images/08.webp" alt="中秋·西湖" loading="lazy">
+      <figcaption>中秋·西湖</figcaption>
+    </figure>
+<figure class="card" data-idx="9">
+      <img src="images/09.webp" alt="国庆·黄山" loading="lazy">
+      <figcaption>国庆·黄山</figcaption>
+    </figure>
+<figure class="card" data-idx="10">
+      <img src="images/10.webp" alt="国庆·上海外滩" loading="lazy">
+      <figcaption>国庆·上海外滩</figcaption>
+    </figure>
+<figure class="card" data-idx="11">
+      <img src="images/11.webp" alt="中秋·故宫角楼" loading="lazy">
+      <figcaption>中秋·故宫角楼</figcaption>
+    </figure>
+<figure class="card" data-idx="12">
+      <img src="images/12.webp" alt="国庆·丽江古城" loading="lazy">
+      <figcaption>国庆·丽江古城</figcaption>
+    </figure>
+<figure class="card" data-idx="13">
+      <img src="images/13.webp" alt="国庆·张家界" loading="lazy">
+      <figcaption>国庆·张家界</figcaption>
+    </figure>
+<figure class="card" data-idx="14">
+      <img src="images/14.webp" alt="国庆·大唐不夜城" loading="lazy">
+      <figcaption>国庆·大唐不夜城</figcaption>
+    </figure>
+</div></section>
+<section id="festivals"><h2>中外节日</h2><h3>中国传统节日·春</h3><div class="grid">
+<figure class="card" data-idx="15">
+      <img src="images/15.webp" alt="春节·年夜饭" loading="lazy">
+      <figcaption>春节·年夜饭</figcaption>
+    </figure>
+<figure class="card" data-idx="16">
+      <img src="images/16.webp" alt="春节·贴春联挂灯笼" loading="lazy">
+      <figcaption>春节·贴春联挂灯笼</figcaption>
+    </figure>
+<figure class="card" data-idx="17">
+      <img src="images/17.webp" alt="春节·舞龙舞狮" loading="lazy">
+      <figcaption>春节·舞龙舞狮</figcaption>
+    </figure>
+<figure class="card" data-idx="18">
+      <img src="images/18.webp" alt="春节·庙会" loading="lazy">
+      <figcaption>春节·庙会</figcaption>
+    </figure>
+<figure class="card" data-idx="19">
+      <img src="images/19.webp" alt="元宵节·赏花灯猜灯谜" loading="lazy">
+      <figcaption>元宵节·赏花灯猜灯谜</figcaption>
+    </figure>
+<figure class="card" data-idx="20">
+      <img src="images/20.webp" alt="元宵节·舞龙灯" loading="lazy">
+      <figcaption>元宵节·舞龙灯</figcaption>
+    </figure>
+<figure class="card" data-idx="21">
+      <img src="images/21.webp" alt="元宵节·吃汤圆" loading="lazy">
+      <figcaption>元宵节·吃汤圆</figcaption>
+    </figure>
+<figure class="card" data-idx="22">
+      <img src="images/22.webp" alt="清明节·踏青放风筝" loading="lazy">
+      <figcaption>清明节·踏青放风筝</figcaption>
+    </figure>
+<figure class="card" data-idx="23">
+      <img src="images/23.webp" alt="清明节·扫墓祭祖" loading="lazy">
+      <figcaption>清明节·扫墓祭祖</figcaption>
+    </figure>
+<figure class="card" data-idx="24">
+      <img src="images/24.webp" alt="端午节·赛龙舟" loading="lazy">
+      <figcaption>端午节·赛龙舟</figcaption>
+    </figure>
+</div><h3>中国传统节日·夏秋冬</h3><div class="grid">
+<figure class="card" data-idx="25">
+      <img src="images/25.webp" alt="端午节·包粽子" loading="lazy">
+      <figcaption>端午节·包粽子</figcaption>
+    </figure>
+<figure class="card" data-idx="26">
+      <img src="images/26.webp" alt="端午节·点雄黄挂艾草" loading="lazy">
+      <figcaption>端午节·点雄黄挂艾草</figcaption>
+    </figure>
+<figure class="card" data-idx="27">
+      <img src="images/27.webp" alt="七夕·鹊桥相会" loading="lazy">
+      <figcaption>七夕·鹊桥相会</figcaption>
+    </figure>
+<figure class="card" data-idx="28">
+      <img src="images/28.webp" alt="七夕·乞巧穿针" loading="lazy">
+      <figcaption>七夕·乞巧穿针</figcaption>
+    </figure>
+<figure class="card" data-idx="29">
+      <img src="images/29.webp" alt="中秋节·钱塘江观潮" loading="lazy">
+      <figcaption>中秋节·钱塘江观潮</figcaption>
+    </figure>
+<figure class="card" data-idx="30">
+      <img src="images/30.webp" alt="中秋节·闽南博饼" loading="lazy">
+      <figcaption>中秋节·闽南博饼</figcaption>
+    </figure>
+<figure class="card" data-idx="31">
+      <img src="images/31.webp" alt="中秋节·拜月" loading="lazy">
+      <figcaption>中秋节·拜月</figcaption>
+    </figure>
+<figure class="card" data-idx="32">
+      <img src="images/32.webp" alt="重阳节·登高远眺" loading="lazy">
+      <figcaption>重阳节·登高远眺</figcaption>
+    </figure>
+<figure class="card" data-idx="33">
+      <img src="images/33.webp" alt="重阳节·赏菊" loading="lazy">
+      <figcaption>重阳节·赏菊</figcaption>
+    </figure>
+<figure class="card" data-idx="34">
+      <img src="images/34.webp" alt="冬至·北方吃饺子" loading="lazy">
+      <figcaption>冬至·北方吃饺子</figcaption>
+    </figure>
+</div><h3>亚洲节日</h3><div class="grid">
+<figure class="card" data-idx="35">
+      <img src="images/35.webp" alt="冬至·南方吃汤圆" loading="lazy">
+      <figcaption>冬至·南方吃汤圆</figcaption>
+    </figure>
+<figure class="card" data-idx="36">
+      <img src="images/36.webp" alt="腊八节·喝腊八粥" loading="lazy">
+      <figcaption>腊八节·喝腊八粥</figcaption>
+    </figure>
+<figure class="card" data-idx="37">
+      <img src="images/37.webp" alt="小年·祭灶吃糖瓜" loading="lazy">
+      <figcaption>小年·祭灶吃糖瓜</figcaption>
+    </figure>
+<figure class="card" data-idx="38">
+      <img src="images/38.webp" alt="泰国泼水节·街头泼水大战" loading="lazy">
+      <figcaption>泰国泼水节·街头泼水大战</figcaption>
+    </figure>
+<figure class="card" data-idx="39">
+      <img src="images/39.webp" alt="泰国泼水节·浴佛" loading="lazy">
+      <figcaption>泰国泼水节·浴佛</figcaption>
+    </figure>
+<figure class="card" data-idx="40">
+      <img src="images/40.webp" alt="印度排灯节·点油灯" loading="lazy">
+      <figcaption>印度排灯节·点油灯</figcaption>
+    </figure>
+<figure class="card" data-idx="41">
+      <img src="images/41.webp" alt="印度排灯节·烟花" loading="lazy">
+      <figcaption>印度排灯节·烟花</figcaption>
+    </figure>
+<figure class="card" data-idx="42">
+      <img src="images/42.webp" alt="印度排灯节·集市" loading="lazy">
+      <figcaption>印度排灯节·集市</figcaption>
+    </figure>
+<figure class="card" data-idx="43">
+      <img src="images/43.webp" alt="日本花见·樱花树下野餐" loading="lazy">
+      <figcaption>日本花见·樱花树下野餐</figcaption>
+    </figure>
+<figure class="card" data-idx="44">
+      <img src="images/44.webp" alt="日本花见·夜樱灯笼" loading="lazy">
+      <figcaption>日本花见·夜樱灯笼</figcaption>
+    </figure>
+</div><h3>欧美节日</h3><div class="grid">
+<figure class="card" data-idx="45">
+      <img src="images/45.webp" alt="圣诞节·圣诞集市" loading="lazy">
+      <figcaption>圣诞节·圣诞集市</figcaption>
+    </figure>
+<figure class="card" data-idx="46">
+      <img src="images/46.webp" alt="圣诞节·装饰圣诞树" loading="lazy">
+      <figcaption>圣诞节·装饰圣诞树</figcaption>
+    </figure>
+<figure class="card" data-idx="47">
+      <img src="images/47.webp" alt="圣诞节·圣诞老人发礼物" loading="lazy">
+      <figcaption>圣诞节·圣诞老人发礼物</figcaption>
+    </figure>
+<figure class="card" data-idx="48">
+      <img src="images/48.webp" alt="圣诞节·平安夜大餐" loading="lazy">
+      <figcaption>圣诞节·平安夜大餐</figcaption>
+    </figure>
+<figure class="card" data-idx="49">
+      <img src="images/49.webp" alt="万圣节·南瓜灯" loading="lazy">
+      <figcaption>万圣节·南瓜灯</figcaption>
+    </figure>
+<figure class="card" data-idx="50">
+      <img src="images/50.webp" alt="万圣节·化装讨糖" loading="lazy">
+      <figcaption>万圣节·化装讨糖</figcaption>
+    </figure>
+<figure class="card" data-idx="51">
+      <img src="images/51.webp" alt="感恩节·火鸡大餐" loading="lazy">
+      <figcaption>感恩节·火鸡大餐</figcaption>
+    </figure>
+<figure class="card" data-idx="52">
+      <img src="images/52.webp" alt="感恩节·游行花车" loading="lazy">
+      <figcaption>感恩节·游行花车</figcaption>
+    </figure>
+<figure class="card" data-idx="53">
+      <img src="images/53.webp" alt="复活节·装饰彩蛋" loading="lazy">
+      <figcaption>复活节·装饰彩蛋</figcaption>
+    </figure>
+<figure class="card" data-idx="54">
+      <img src="images/54.webp" alt="复活节·草坪找彩蛋" loading="lazy">
+      <figcaption>复活节·草坪找彩蛋</figcaption>
+    </figure>
+</div><h3>世界其他</h3><div class="grid">
+<figure class="card" data-idx="55">
+      <img src="images/55.webp" alt="威尼斯狂欢节·面具游行" loading="lazy">
+      <figcaption>威尼斯狂欢节·面具游行</figcaption>
+    </figure>
+<figure class="card" data-idx="56">
+      <img src="images/56.webp" alt="威尼斯狂欢节·贡多拉" loading="lazy">
+      <figcaption>威尼斯狂欢节·贡多拉</figcaption>
+    </figure>
+<figure class="card" data-idx="57">
+      <img src="images/57.webp" alt="慕尼黑啤酒节·帐篷畅饮" loading="lazy">
+      <figcaption>慕尼黑啤酒节·帐篷畅饮</figcaption>
+    </figure>
+<figure class="card" data-idx="58">
+      <img src="images/58.webp" alt="慕尼黑啤酒节·花车游行" loading="lazy">
+      <figcaption>慕尼黑啤酒节·花车游行</figcaption>
+    </figure>
+<figure class="card" data-idx="59">
+      <img src="images/59.webp" alt="巴西狂欢节·桑巴花车" loading="lazy">
+      <figcaption>巴西狂欢节·桑巴花车</figcaption>
+    </figure>
+<figure class="card" data-idx="60">
+      <img src="images/60.webp" alt="巴西狂欢节·街头舞蹈" loading="lazy">
+      <figcaption>巴西狂欢节·街头舞蹈</figcaption>
+    </figure>
+<figure class="card" data-idx="61">
+      <img src="images/61.webp" alt="荷兰郁金香·花田风车" loading="lazy">
+      <figcaption>荷兰郁金香·花田风车</figcaption>
+    </figure>
+<figure class="card" data-idx="62">
+      <img src="images/62.webp" alt="荷兰郁金香·花车巡游" loading="lazy">
+      <figcaption>荷兰郁金香·花车巡游</figcaption>
+    </figure>
+<figure class="card" data-idx="63">
+      <img src="images/63.webp" alt="韩国秋夕·团圆祭祖" loading="lazy">
+      <figcaption>韩国秋夕·团圆祭祖</figcaption>
+    </figure>
+<figure class="card" data-idx="64">
+      <img src="images/64.webp" alt="墨西哥亡灵节·万寿菊祭坛" loading="lazy">
+      <figcaption>墨西哥亡灵节·万寿菊祭坛</figcaption>
+    </figure>
+</div></section>
+</main>
+<footer>中国农民画风格 · 色彩鲜亮 / 平面装饰 / 构图热闹 —— 共 64 幅</footer>
+<div id="lightbox" role="dialog" aria-modal="true">
+  <button id="close" aria-label="关闭">×</button>
+  <button class="btn" id="prev" aria-label="上一张">‹</button>
+  <img id="lbimg" src="" alt="">
+  <div class="cap" id="lbcap"></div>
+  <button class="btn" id="next" aria-label="下一张">›</button>
+</div>
+<script>
+var cards=Array.prototype.slice.call(document.querySelectorAll('.card'));
+var lb=document.getElementById('lightbox'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap'),cur=0;
+function show(i){cur=(i+cards.length)%cards.length;var c=cards[cur];lbimg.src=c.querySelector('img').src;lbimg.alt=c.querySelector('figcaption').textContent;lbcap.textContent=(cur+1)+' / 64 · '+lbimg.alt;}
+cards.forEach(function(c,i){c.addEventListener('click',function(){lb.classList.add('open');show(i);});});
+document.getElementById('close').onclick=function(){lb.classList.remove('open');};
+document.getElementById('prev').onclick=function(e){e.stopPropagation();show(cur-1);};
+document.getElementById('next').onclick=function(e){e.stopPropagation();show(cur+1);};
+lb.addEventListener('click',function(e){if(e.target===lb)lb.classList.remove('open');});
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
+</script>
+</body>
+</html>
