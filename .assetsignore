@@ -19,3 +19,6 @@ assets/PingFang.ttc
 assets/audio/
 assets/master_audio.mp3
 assets/readme/
+
+.DS_Store
+**/.DS_Store
