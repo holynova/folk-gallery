@@ -46,19 +46,19 @@ footer{text-align:center;padding:28px;color:#8a7a5c;font-size:.85rem}
 <section id="folk"><h2>农民画·节日图鉴（64幅）</h2>
 <h3>田园乡村</h3><div class="grid">
 <figure class="card">
-      <img src="images/thumbs/01.webp" data-full="images/01.webp" alt="水乡早市" loading="lazy" decoding="async" width="1280" height="1697">
+      <img src="images/thumbs/01.webp" data-full="images/01.webp" alt="水乡早市" loading="eager" fetchpriority="high" decoding="async" width="1280" height="1697">
       <figcaption>水乡早市</figcaption>
     </figure>
 <figure class="card">
-      <img src="images/thumbs/02.webp" data-full="images/02.webp" alt="丰收打谷场" loading="lazy" decoding="async" width="1280" height="1697">
+      <img src="images/thumbs/02.webp" data-full="images/02.webp" alt="丰收打谷场" loading="eager" fetchpriority="high" decoding="async" width="1280" height="1697">
       <figcaption>丰收打谷场</figcaption>
     </figure>
 <figure class="card">
-      <img src="images/thumbs/03.webp" data-full="images/03.webp" alt="渔村归来" loading="lazy" decoding="async" width="1280" height="1697">
+      <img src="images/thumbs/03.webp" data-full="images/03.webp" alt="渔村归来" loading="eager" fetchpriority="high" decoding="async" width="1280" height="1697">
       <figcaption>渔村归来</figcaption>
     </figure>
 <figure class="card">
-      <img src="images/thumbs/04.webp" data-full="images/04.webp" alt="梯田春耕" loading="lazy" decoding="async" width="1280" height="1697">
+      <img src="images/thumbs/04.webp" data-full="images/04.webp" alt="梯田春耕" loading="eager" fetchpriority="high" decoding="async" width="1280" height="1697">
       <figcaption>梯田春耕</figcaption>
     </figure>
 </div>
@@ -1430,15 +1430,82 @@ footer{text-align:center;padding:28px;color:#8a7a5c;font-size:.85rem}
   <button class="btn" id="next" aria-label="下一张">›</button>
 </div>
 <script>
-var cards=Array.prototype.slice.call(document.querySelectorAll('.card'));
-var lb=document.getElementById('lightbox'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap'),cur=0;
-function preload(i){i=(i+cards.length)%cards.length;var im=new Image();im.src=cards[i].querySelector('img').getAttribute('data-full');}function show(i){cur=(i+cards.length)%cards.length;var c=cards[cur];lbimg.src=c.querySelector('img').getAttribute('data-full');lbimg.alt=c.querySelector('figcaption').textContent;lbcap.textContent=(cur+1)+' / 321 · '+lbimg.alt;preload(cur-1);preload(cur+1);}
-cards.forEach(function(c,i){c.addEventListener('click',function(){lb.classList.add('open');show(i);});});
-document.getElementById('close').onclick=function(){lb.classList.remove('open');};
-document.getElementById('prev').onclick=function(e){e.stopPropagation();show(cur-1);};
-document.getElementById('next').onclick=function(e){e.stopPropagation();show(cur+1);};
-lb.addEventListener('click',function(e){if(e.target===lb)lb.classList.remove('open');});
-document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
+var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+var lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbcap = document.getElementById('lbcap'), cur = 0;
+var lbRevision = 0;
+
+function preload(i) {
+  i = (i + cards.length) % cards.length;
+  var target = cards[i].querySelector('img');
+  var fullUrl = target ? target.getAttribute('data-full') : null;
+  if (fullUrl) {
+    var im = new Image();
+    im.src = fullUrl;
+  }
+}
+
+function show(i) {
+  cur = (i + cards.length) % cards.length;
+  var c = cards[cur];
+  var cardImg = c.querySelector('img');
+  var thumbUrl = cardImg.src;
+  var fullUrl = cardImg.getAttribute('data-full');
+  var title = c.querySelector('figcaption').textContent;
+
+  lbimg.alt = title;
+  lbcap.textContent = (cur + 1) + ' / ' + cards.length + ' · ' + title;
+
+  // Progressive upgrade: immediately display cached thumbnail (zero latency)
+  lbimg.src = thumbUrl;
+
+  var req = ++lbRevision;
+  if (fullUrl && fullUrl !== thumbUrl) {
+    var offscreen = new Image();
+    var commit = function() {
+      var decodePromise = (typeof offscreen.decode === 'function') ? offscreen.decode() : Promise.resolve();
+      decodePromise.then(function() {
+        if (req === lbRevision) {
+          lbimg.src = fullUrl;
+        }
+      }).catch(function() {
+        if (req === lbRevision) {
+          lbimg.src = fullUrl;
+        }
+      });
+    };
+    offscreen.onload = commit;
+    offscreen.src = fullUrl;
+    if (offscreen.complete && offscreen.naturalWidth > 0) {
+      commit();
+    }
+  }
+
+  preload(cur - 1);
+  preload(cur + 1);
+}
+
+cards.forEach(function(c, i) {
+  c.addEventListener('click', function() {
+    lb.classList.add('open');
+    show(i);
+  });
+});
+
+function closeLb() {
+  lbRevision++;
+  lb.classList.remove('open');
+}
+
+document.getElementById('close').onclick = closeLb;
+document.getElementById('prev').onclick = function(e) { e.stopPropagation(); show(cur - 1); };
+document.getElementById('next').onclick = function(e) { e.stopPropagation(); show(cur + 1); };
+lb.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', function(e) {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') show(cur - 1);
+  if (e.key === 'ArrowRight') show(cur + 1);
+});
 </script>
 <footer style="text-align:center;padding:24px;font:12px system-ui;color:#777">印画图鉴 · v1.1.0 · <a href="https://github.com/holynova/folk-gallery">GitHub</a></footer>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e01c9f78-4607-4e60-b01c-77c8190b12b4"></script>
