@@ -21,7 +21,7 @@ h3{font-size:var(--fs-l);color:#8f2a20;margin:26px 0 14px;padding-left:4px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
 .card{background:#fffdf6;border:1px solid #e4d7bc;border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .15s}
 .card:hover{transform:translateY(-3px)}
-.card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#eee5cf}
+.card img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block;background:#eee5cf}
 .card figcaption{padding:10px 12px;font-size:var(--fs-m);font-weight:600;color:#3a3226;text-align:center;border-top:3px solid #b5342a}
 .card figcaption .sub{display:block;font-size:var(--fs-s);font-weight:400;color:#7a6a4c;margin-top:2px}
 footer{text-align:center;padding:28px;color:#7a6a4c;font-size:var(--fs-s)}
@@ -34,10 +34,10 @@ footer a{color:#8f2a20}
 #lightbox .btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,248,234,.15);color:#fff8ea;border:2px solid #fff8ea;border-radius:50%;width:48px;height:48px;font-size:var(--fs-l);cursor:pointer}
 #lightbox .btn:hover{background:rgba(255,248,234,.35)}
 #prev{left:16px}#next{right:16px}
-#close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff8ea;font-size:var(--fs-xl);cursor:pointer}
+#close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff8ea;font-size:var(--fs-xl);cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0}
 #to-top{position:fixed;right:16px;bottom:16px;z-index:90;width:44px;height:44px;border-radius:50%;border:none;background:#b5342a;color:#fff8ea;font-size:var(--fs-l);cursor:pointer;display:none;box-shadow:0 4px 12px rgba(0,0,0,.25)}
 #to-top.show{display:block}
-@media(max-width:600px){.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}#lightbox .btn{width:40px;height:40px}}
+@media(max-width:600px){.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}header{padding:20px 16px 18px}main{padding:16px 16px 48px}h2{margin:24px 0 12px}h3{margin:18px 0 10px}nav{display:flex;flex-wrap:nowrap;overflow-x:auto;padding:6px 8px;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav a{flex:none;margin:0 4px;padding:10px 8px}#lightbox .btn{width:44px;height:44px}}
 </style>
 </head>
 <body>
